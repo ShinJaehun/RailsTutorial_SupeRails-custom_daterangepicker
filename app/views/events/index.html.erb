@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+<!--
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alumuko/vanilla-datetimerange-picker@latest/dist/vanilla-datetimerange-picker.css">
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" type="text/javascript"></script>
+-->
+<script src="https://cdn.jsdelivr.net/gh/alumuko/vanilla-datetimerange-picker@latest/dist/vanilla-datetimerange-picker.js"></script>
+<!-- 결국 이 코드는 있어야 함! -->
+
+<input type="text" id="datepicker" data-controller="daterangepicker" size="24" style="text-align:center">
+
+<%= form_with url: events_path, method: :get do |form| %>
+  <%= form.text_field :start_date_between, value: params[:start_date_between], data: { controller: "daterangepicker" } %>
+  <%= form.submit "search" %>
+<% end %>
+
+<h1>Events</h1>
+
+<div id="events">
+  <% @events.each do |event| %>
+    <%= render event %>
+    <p>
+      <%= link_to "Show this event", event %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New event", new_event_path %>
